@@ -1,0 +1,1046 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Supply — Vertrieb & Steuersparmodell</title>
+<style>
+  :root{
+    --paper:#FCFBF7; --surface:#FFFFFF; --surface-2:#F4F0E6;
+    --ink:#1F1B16; --ink-soft:#615A50; --hairline:#EAE4D7;
+    --red:#7E1626; --red-soft:#9A2233;
+    --gold:#B98A2A; --gold-bright:#C79A33; --gold-text:#8A6417;
+    --focus:#7E1626;
+    --maxw:1160px;
+    --f-display:"Helvetica Neue",Arial,system-ui,sans-serif;
+    --f-serif:Charter,"Iowan Old Style",Georgia,"Times New Roman",serif;
+    --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  :root[data-theme="light"]{
+    --paper:#FCFBF7; --surface:#FFFFFF; --surface-2:#F4F0E6;
+    --ink:#1F1B16; --ink-soft:#615A50; --hairline:#EAE4D7;
+    --red:#7E1626; --red-soft:#9A2233; --gold:#B98A2A; --gold-bright:#C79A33; --gold-text:#8A6417;
+  }
+  *{box-sizing:border-box}
+  body{margin:0}
+  .page{background:var(--paper);color:var(--ink);
+    font-family:var(--f-serif);font-size:18px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;text-wrap:balance;margin:0}
+  .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text)}
+  .view{display:none}
+  .view.active{display:block}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{font-family:var(--f-display);font-weight:800;letter-spacing:-.01em;color:var(--ink);
+    font-size:18px;display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--red);
+    box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 22%,transparent)}
+  .nav-links{display:flex;gap:24px;font-family:var(--f-mono);font-size:12.5px;
+    letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase}
+  .nav-links a{text-decoration:none}
+  .nav-links a:hover,.nav-links a.active{color:var(--red)}
+  .nav-cta{font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;
+    color:#fff;background:var(--red);padding:10px 17px;border-radius:2px;text-decoration:none;font-weight:600}
+  .nav-cta:hover{background:var(--red-soft)}
+  @media(max-width:860px){.nav-links{display:none}}
+
+  /* hero */
+  .hero{background:
+      radial-gradient(70% 55% at 92% -8%,color-mix(in srgb,var(--gold) 16%,transparent),transparent 62%),
+      linear-gradient(180deg,var(--surface),var(--paper));
+    color:var(--ink);position:relative;overflow:hidden;border-bottom:1px solid var(--hairline)}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
+  .hero .wrap{padding-top:100px;padding-bottom:92px}
+  .hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:54px;align-items:end}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr;gap:38px}}
+  .hero h1{font-size:clamp(40px,7vw,78px);line-height:.98}
+  .hero h1 .accent{color:var(--red)}
+  .hero .lead{font-size:clamp(18px,2.2vw,22px);color:var(--ink-soft);max-width:36ch;margin-top:22px;line-height:1.5}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+  .hero--sub .wrap{padding-top:84px;padding-bottom:68px}
+  .hero--sub h1{max-width:18ch;font-size:clamp(38px,6.5vw,66px);line-height:1.02}
+  .hero--sub .lead{max-width:56ch}
+  .crumb{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:22px}
+  .crumb a{color:var(--gold-text);text-decoration:none;cursor:pointer}
+
+  .btn{font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.05em;font-size:13px;font-weight:600;
+    padding:14px 22px;border-radius:2px;border:0;text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+    transition:transform .15s ease,background .15s ease;cursor:pointer}
+  .btn-primary{background:var(--red);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--red-soft)}
+  .btn-ghost{border:1px solid var(--gold);color:var(--ink)}
+  .btn-ghost:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+
+  /* manifest card */
+  .manifest{border:1px solid var(--hairline);border-radius:4px;background:var(--surface);
+    box-shadow:0 1px 0 color-mix(in srgb,var(--gold) 30%,transparent)}
+  .manifest .m-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;
+    border-bottom:1px solid var(--hairline);font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--gold-text)}
+  .m-row{display:flex;justify-content:space-between;align-items:baseline;padding:15px 16px;border-bottom:1px solid var(--hairline)}
+  .m-row:last-child{border-bottom:0}
+  .m-row .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+  .m-row .v{font-family:var(--f-display);font-weight:800;font-size:26px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .m-row .v small{font-size:13px;color:var(--red);font-weight:700}
+
+  section{padding:100px 0}
+  .sec-head{max-width:60ch;margin-bottom:56px}
+  .sec-head h2{font-size:clamp(28px,4.4vw,46px);line-height:1.04;margin-top:14px}
+  .sec-head p{color:var(--ink-soft);margin-top:16px;font-size:19px}
+
+  /* card grids */
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:760px){.pillars{grid-template-columns:1fr}}
+  .pillars-3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:820px){.pillars-3{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.pillars-3{grid-template-columns:1fr}}
+  .pillar{background:var(--surface);border:1px solid var(--hairline);border-radius:6px;
+    padding:36px 32px;position:relative;overflow:hidden}
+  .pillar::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;
+    background:linear-gradient(90deg,var(--gold),transparent 70%)}
+  .pillar h3{font-size:23px;margin-bottom:12px}
+  .pillar p{color:var(--ink-soft);font-size:16.5px}
+  .pillar .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text)}
+  .pillar ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:11px}
+  .pillar li{padding-left:24px;position:relative;font-size:16px;color:var(--ink)}
+  .pillar li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;
+    border:1.5px solid var(--gold);border-radius:1px;transform:rotate(45deg)}
+  .more{display:inline-block;margin-top:20px;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--red);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;cursor:pointer}
+
+  /* band */
+  .band{background:var(--surface-2);color:var(--ink);border-radius:10px;padding:60px 52px;
+    position:relative;overflow:hidden;border:1px solid var(--gold)}
+  .band::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+  .band h2{color:var(--ink);font-size:clamp(26px,4vw,40px);margin:14px 0 18px;max-width:22ch}
+  .band p{color:var(--ink-soft);max-width:56ch;font-size:18px}
+  .band-cta{margin-top:28px}
+  .band-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+  @media(max-width:640px){.band-stats{grid-template-columns:1fr;gap:20px}}
+  .band-stats .v{font-family:var(--f-display);font-weight:800;font-size:46px;color:var(--red);
+    font-variant-numeric:tabular-nums;line-height:1}
+  .band-stats .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px}
+
+  .trust{display:flex;flex-wrap:wrap;gap:14px 40px;align-items:center;padding:26px 0;
+    border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
+    font-family:var(--f-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .trust span:nth-child(even){color:var(--gold-text)}
+
+  /* timeline */
+  .timeline{position:relative;display:grid;gap:0;margin-left:6px}
+  .tl{position:relative;display:grid;grid-template-columns:64px 1fr;gap:24px;padding:0 0 46px}
+  .tl:last-child{padding-bottom:0}
+  .tl-rail{position:relative}
+  .tl-num{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;background:var(--surface);
+    font-family:var(--f-mono);font-weight:600;font-size:15px;color:var(--red);font-variant-numeric:tabular-nums;position:relative;z-index:2}
+  .tl:not(:last-child) .tl-rail::after{content:"";position:absolute;left:23.5px;top:48px;bottom:-46px;
+    width:1px;background:linear-gradient(180deg,var(--gold),var(--hairline))}
+  .tl-body{padding-top:4px}
+  .tl-phase{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-text)}
+  .tl-body h3{font-size:24px;margin:8px 0 10px}
+  .tl-body p{color:var(--ink-soft);font-size:17px;max-width:60ch}
+  .tl-body ul{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:9px}
+  .tl-body li{position:relative;padding-left:22px;font-size:15.5px}
+  .tl-body li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border:1.5px solid var(--gold);transform:rotate(45deg)}
+  .tl-meta{margin-top:16px;font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--red)}
+
+  .promise{background:var(--surface-2);border:1px solid var(--gold);border-radius:10px;padding:44px 40px;position:relative;overflow:hidden}
+  .promise::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+  .promise h2{font-size:clamp(24px,3.4vw,34px);max-width:24ch}
+  .promise p{color:var(--ink-soft);max-width:56ch;margin-top:14px;font-size:18px}
+
+  .faq{display:grid;gap:0;border-top:1px solid var(--hairline)}
+  .faq details{border-bottom:1px solid var(--hairline);padding:22px 0}
+  .faq summary{font-family:var(--f-display);font-weight:700;font-size:20px;cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--f-mono);color:var(--red);font-size:22px}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{color:var(--ink-soft);margin:14px 0 0;font-size:17px;max-width:64ch}
+
+  /* about + team */
+  .about-grid{display:grid;grid-template-columns:1.3fr .85fr;gap:48px;align-items:start}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:34px}}
+  .about-lead{font-size:20px;line-height:1.65;color:var(--ink)}
+  .about-lead p{margin:0 0 18px}
+  .about-lead p:last-child{margin-bottom:0;color:var(--ink-soft)}
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:680px){.team{grid-template-columns:1fr}}
+  .member{background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:32px 30px;position:relative;overflow:hidden}
+  .member::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent 70%)}
+  .member-head{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+  .member-ava{width:60px;height:60px;border-radius:50%;border:1.5px solid var(--gold);background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:800;font-size:20px;color:var(--red);flex:none}
+  .member-name{font-family:var(--f-display);font-weight:800;font-size:21px}
+  .member-role{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-text);margin-top:5px}
+  .member p{color:var(--ink-soft);font-size:16.5px}
+
+  .note{margin-top:30px;padding:16px 18px;border-left:3px solid var(--gold);background:var(--surface);
+    font-size:14.5px;color:var(--ink-soft);border-radius:0 4px 4px 0;max-width:64ch}
+
+  /* Steckbrief */
+  .steckbrief-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:760px){.steckbrief-grid{grid-template-columns:1fr}}
+  .steckbrief{background:var(--surface);border:1px solid var(--hairline);
+    border-radius:10px;padding:36px 34px;position:relative;overflow:hidden}
+  .steckbrief::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;
+    background:linear-gradient(90deg,var(--gold),transparent 70%)}
+  .sb-head{display:flex;align-items:center;gap:18px;padding-bottom:22px;border-bottom:1px solid var(--hairline)}
+  .sb-ava{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--gold);background:var(--surface-2);
+    display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:800;
+    font-size:22px;color:var(--red);flex:none}
+  .sb-name{font-family:var(--f-display);font-weight:800;font-size:23px}
+  .sb-role{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-text);margin-top:5px}
+  .sb-facts{margin:6px 0 0;display:grid;gap:0}
+  .sb-facts>div{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--hairline)}
+  .sb-facts>div:last-child{border-bottom:0}
+  .sb-facts dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+  .sb-facts dd{margin:0;font-size:16px;color:var(--ink)}
+  .sb-text{margin:22px 0 0;font-size:17px;line-height:1.6;color:var(--ink-soft);
+    border-left:3px solid var(--gold);padding-left:18px}
+  @media(max-width:560px){.sb-facts>div{grid-template-columns:1fr;gap:4px}}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:8px;background:var(--surface)}
+  .ntable{width:100%;border-collapse:collapse;font-size:16px;min-width:460px}
+  .ntable caption{caption-side:top;text-align:left;font-family:var(--f-mono);font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text);padding:16px 18px 4px}
+  .ntable th,.ntable td{padding:13px 18px;border-bottom:1px solid var(--hairline);text-align:left;vertical-align:top}
+  .ntable thead th{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .ntable td.num,.ntable th.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  .ntable tbody tr:last-child td{border-bottom:0}
+  .ntable tr.hl td{background:var(--surface-2);font-weight:700;color:var(--ink)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:720px){.grid-2{grid-template-columns:1fr}}
+  /* Kontakt / Formular */
+  .contact-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:40px;align-items:start}
+  @media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:32px}}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:560px){.form-grid{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field.full{grid-column:1 / -1}
+  .field label{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .field input,.field select,.field textarea{font-family:var(--f-serif);font-size:16px;padding:12px 14px;
+    border:1px solid var(--hairline);border-radius:6px;background:var(--surface);color:var(--ink);width:100%}
+  .field textarea{min-height:120px;resize:vertical}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 22%,transparent)}
+  .req{color:var(--red)}
+  .form-actions{margin-top:22px}
+  .form-hint{margin-top:16px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.03em;color:var(--ink-soft);line-height:1.5;max-width:54ch}
+  .form-success{display:none;border:1px solid var(--gold);background:var(--surface-2);border-radius:10px;padding:28px 26px}
+  .form-success h3{font-size:22px}
+  .form-success p{margin-top:10px;color:var(--ink-soft);font-size:16px}
+  .form-success a{color:var(--red)}
+  .contact-card{background:var(--surface-2);border:1px solid var(--gold);border-radius:10px;padding:30px 28px;position:relative;overflow:hidden}
+  .contact-card::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+  .contact-card h3{font-size:20px}
+  .ci{display:flex;flex-direction:column;gap:2px;margin-top:16px}
+  .ci .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .ci a{color:var(--red);text-decoration:none}
+  .ci-sep{border:0;border-top:1px solid var(--hairline);margin:24px 0}
+  .ci-steps{margin:14px 0 0;padding-left:20px;color:var(--ink-soft);font-size:15px;display:grid;gap:8px}
+  .embed-placeholder{border:1px dashed var(--gold);border-radius:10px;background:var(--surface);
+    padding:44px 36px;display:flex;flex-direction:column;gap:14px;align-items:flex-start;
+    min-height:460px;justify-content:center}
+  .embed-placeholder h3{font-size:24px}
+  .embed-placeholder p{color:var(--ink-soft);font-size:16px;max-width:48ch}
+  .embed-note{margin-top:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft)}
+  .cta-final{text-align:center;padding:100px 0}
+  .cta-final h2{font-size:clamp(30px,5vw,52px);max-width:18ch;margin:0 auto 20px}
+  .cta-final p{color:var(--ink-soft);max-width:46ch;margin:0 auto 30px;font-size:19px}
+
+  footer{background:var(--surface);color:var(--ink-soft);padding:44px 0;font-family:var(--f-mono);
+    font-size:12.5px;border-top:1px solid var(--gold)}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer a{text-decoration:none;color:var(--red);cursor:pointer}
+  footer a:hover{color:var(--red-soft)}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+  .ph{border-bottom:1px dashed var(--gold);cursor:help}
+</style>
+
+<div class="page">
+
+  <nav class="nav">
+    <div class="wrap">
+      <a href="#/" class="brand" data-nav><span class="dot"></span>NEXT&nbsp;SUPPLY</a>
+      <div class="nav-links">
+        <a href="#/modell" data-nav data-page="modell">Modell</a>
+        <a href="#/ablauf" data-nav data-page="ablauf">Ablauf</a>
+        <a href="#/steuer" data-nav data-page="steuer">Steuervorteil</a>
+        <a href="#/partner" data-nav data-page="partner">Partner</a>
+        <a href="#/ueber-uns" data-nav data-page="ueber">Über uns</a>
+      </div>
+      <a href="#/kontakt" class="nav-cta" data-nav data-page="kontakt">Gespräch anfragen</a>
+    </div>
+  </nav>
+
+  <!-- ============ START ============ -->
+  <div class="view active" id="view-home">
+    <header class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow reveal">Mitarbeiterverpflegung · Löwenanteil</div>
+            <h1 class="reveal" style="margin-top:18px">Mittagessen fürs Team,<br>das sich <span class="accent">rechnet</span>.</h1>
+            <p class="lead reveal">Next Supply verpflegt deine Mitarbeiter mit vollwertigen
+              Mahlzeiten von Löwenanteil — kombiniert mit dem steuerbegünstigten
+              Essenszuschuss. Der Betrieb spart, das Team isst günstig und gut.</p>
+            <div class="hero-cta reveal">
+              <a href="#/modell" class="btn btn-primary" data-nav>Modell entdecken →</a>
+              <a href="#/steuer" class="btn btn-ghost" data-nav>Steuervorteil ansehen</a>
+            </div>
+          </div>
+          <div class="manifest reveal" aria-label="Kennzahlen">
+            <div class="m-head"><span>Manifest</span><span>NXS-VTR</span></div>
+            <div class="m-row"><span class="k">Zuschuss / Tag</span><span class="v">7,67<small>€</small></span></div>
+            <div class="m-row"><span class="k">Lieferzeit</span><span class="v">3–4<small>Werktage</small></span></div>
+            <div class="m-row"><span class="k">Aktive Partner</span><span class="v">1</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Überblick</div>
+          <h2>Gutes Essen, das den Betrieb entlastet.</h2>
+          <p>Vier Bausteine, ein Modell. Klick dich rein — jede Seite erklärt einen Teil im Detail.</p>
+        </div>
+        <div class="pillars">
+          <div class="pillar reveal">
+            <div class="tag">01 — Modell</div>
+            <h3>Verpflegung &amp; Steuervorteil</h3>
+            <p>Ein Angebot, zwei Hebel: vollwertige Mahlzeiten fürs Team plus der
+              steuerbegünstigte Essenszuschuss.</p>
+            <a href="#/modell" class="more" data-nav>Modell ansehen →</a>
+          </div>
+          <div class="pillar reveal">
+            <div class="tag">02 — Ablauf</div>
+            <h3>Von Anfrage bis Mittagstisch</h3>
+            <p>Vier klare Phasen, kein Blindflug. So läuft die Zusammenarbeit von
+              Tag eins an.</p>
+            <a href="#/ablauf" class="more" data-nav>Ablauf ansehen →</a>
+          </div>
+          <div class="pillar reveal">
+            <div class="tag">03 — Steuervorteil</div>
+            <h3>Mittagessen mit Steuervorteil</h3>
+            <p>Bis zu 7,67 € pro Mitarbeiter und Arbeitstag steuerbegünstigt — echter
+              Benefit, den der Staat mitfinanziert.</p>
+            <a href="#/steuer" class="more" data-nav>Steuervorteil ansehen →</a>
+          </div>
+          <div class="pillar reveal">
+            <div class="tag">04 — Partner</div>
+            <h3>Für wen wir kochen</h3>
+            <p>Für Betriebe jeder Größe, die ihrem Team ein gutes Mittagessen bieten wollen.</p>
+            <a href="#/partner" class="more" data-nav>Partner werden →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="trust reveal">
+          <span>Next Supply UG</span><span>·</span>
+          <span>Mitarbeiterverpflegung</span><span>·</span>
+          <span>Löwenanteil</span><span>·</span>
+          <span>Essenszuschuss 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final" style="padding-top:20px">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="eyebrow">Nächster Schritt</div>
+          <h2 style="margin-top:16px">Lass uns dein Beschaffungs­modell durchrechnen.</h2>
+          <p>15 Minuten reichen, um zu sehen, was das Modell für deinen Betrieb bedeutet.</p>
+          <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="wrap">
+        <span>© 2026 Next Supply UG</span>
+        <span class="foot-links">
+          <a href="#/modell" data-nav>Modell</a><a href="#/ablauf" data-nav>Ablauf</a>
+          <a href="#/steuer" data-nav>Steuervorteil</a><a href="#/partner" data-nav>Partner</a>
+          <a href="#/ueber-uns" data-nav>Über uns</a><a href="#/kontakt" data-nav>Kontakt</a>
+          <a href="#/impressum" data-nav>Impressum</a><a href="#/datenschutz" data-nav>Datenschutz</a>
+          <a href="https://fundraising.next-supply.de">Fundraising →</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ============ MODELL ============ -->
+  <div class="view" id="view-modell">
+    <header class="hero hero--sub">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Modell</div>
+        <div class="eyebrow reveal">Das Modell</div>
+        <h1 class="reveal" style="margin-top:16px">Ein Angebot, <span class="accent">zwei Hebel</span>.</h1>
+        <p class="lead reveal">Wir bringen vollwertige Mahlzeiten von Löwenanteil in den
+          Betrieb — kombiniert mit dem steuerbegünstigten Essenszuschuss. So gewinnen
+          Arbeitgeber und Team gleichzeitig.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="pillars">
+          <div class="pillar reveal">
+            <div class="tag">Säule 01 — Verpflegung</div>
+            <h3>Vollwertige Mahlzeiten fürs Team</h3>
+            <p>Löwenanteil liefert ausgewogene Mahlzeiten in den Betrieb – schnell fertig,
+              abwechslungsreich, auch vegan. Ohne Kantine, ohne Kochaufwand.</p>
+            <ul>
+              <li>Feste Ansprechpartner statt Ticket-System</li>
+              <li>Wechselnde Sorten, vegane Optionen (z. B. Gelbes Thai Curry)</li>
+              <li>Planbar geliefert in 3–4 Werktagen</li>
+            </ul>
+          </div>
+          <div class="pillar reveal">
+            <div class="tag">Säule 02 — Steuervorteil</div>
+            <h3>Steuerbegünstigter Essenszuschuss</h3>
+            <p>Der Arbeitgeber bezuschusst die Mahlzeiten steuerbegünstigt, der Eigenanteil
+              läuft übers Bruttogehalt – gespart wird auf beiden Seiten.</p>
+            <ul>
+              <li>Bis 7,67 € pro Mitarbeiter und Tag begünstigt (2026)</li>
+              <li>Voll als Betriebsausgabe absetzbar, SV-frei</li>
+              <li>Transparent abgerechnet, prüfbar für Steuerberater</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Warum das zusammengehört</div>
+          <h2>Ein Modell, von dem alle etwas haben.</h2>
+        </div>
+        <div class="pillars-3">
+          <div class="pillar reveal"><h3>Zufriedenes Team</h3><p>Gutes Essen als spürbarer Benefit — jeden Arbeitstag aufs Neue.</p></div>
+          <div class="pillar reveal"><h3>Echte Ersparnis</h3><p>Steuer- und Sozialabgaben-Vorteil für Arbeitgeber und Mitarbeiter.</p></div>
+          <div class="pillar reveal"><h3>Rechtssicherheit</h3><p>Sauber dokumentiert, jederzeit prüfbar für deinen Steuerberater.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final" style="padding-top:0">
+      <div class="wrap"><div class="reveal">
+        <div class="eyebrow">Nächster Schritt</div>
+        <h2 style="margin-top:16px">Wie viel könntest du sparen?</h2>
+        <p>Wir rechnen dir unverbindlich durch, was das Modell für dein Team bedeutet.</p>
+        <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
+      </div></div>
+    </section>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Modell</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+  </div>
+
+  <!-- ============ ABLAUF ============ -->
+  <div class="view" id="view-ablauf">
+    <header class="hero hero--sub">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Ablauf</div>
+        <div class="eyebrow reveal">Von der Anfrage bis zur Rampe</div>
+        <h1 class="reveal" style="margin-top:16px">So arbeiten wir <span class="accent">zusammen</span>.</h1>
+        <p class="lead reveal">Kein Blindflug: Jeder Schritt ist klar, planbar und von
+          Anfang an steuerlich sauber aufgesetzt.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head reveal"><div class="eyebrow">Der Ablauf</div><h2>Vier Phasen, ein reibungsloser Weg.</h2></div>
+        <div class="timeline">
+          <div class="tl reveal"><div class="tl-rail"><div class="tl-num">01</div></div><div class="tl-body">
+            <div class="tl-phase">Phase 01 · Kennenlernen</div><h3>Bedarf klären</h3>
+            <p>In einem kurzen Gespräch klären wir: Wie viele Mitarbeiter, an welchen Tagen,
+              welche Vorlieben (z. B. vegane Optionen)?</p>
+            <ul><li>Mitarbeiterzahl &amp; Verpflegungstage abstecken</li><li>Sorten &amp; Vorlieben klären</li><li>Erste Ersparnis-Einschätzung</li></ul>
+            <div class="tl-meta">Dauer · ca. 15–30 Min</div></div></div>
+          <div class="tl reveal"><div class="tl-rail"><div class="tl-num">02</div></div><div class="tl-body">
+            <div class="tl-phase">Phase 02 · Setup</div><h3>Steuer-Setup aufsetzen</h3>
+            <p>Wir richten den Essenszuschuss so ein, dass er steuerlich sauber läuft —
+              abgestimmt mit deinem Steuerberater, damit von Tag eins alles passt.</p>
+            <ul><li>Essenszuschuss &amp; Eigenanteil einrichten</li><li>Abstimmung mit deinem Steuerberater</li><li>Abläufe &amp; Rahmen fixieren</li></ul>
+            <div class="tl-meta">Steuerlich sauber ab Tag 1</div></div></div>
+          <div class="tl reveal"><div class="tl-rail"><div class="tl-num">03</div></div><div class="tl-body">
+            <div class="tl-phase">Phase 03 · Betrieb</div><h3>Liefern &amp; genießen</h3>
+            <p>Ab jetzt läuft's: Ihr bestellt, wir liefern die Löwenanteil-Mahlzeiten
+              verlässlich in den Betrieb — das Team isst gemeinsam.</p>
+            <ul><li>Planbare Lieferung in 3–4 Werktagen</li><li>Wechselnde Sorten, vegane Optionen</li><li>Ein Ansprechpartner für alles</li></ul>
+            <div class="tl-meta">Lieferzeit · 3–4 Werktage</div></div></div>
+          <div class="tl reveal"><div class="tl-rail"><div class="tl-num">04</div></div><div class="tl-body">
+            <div class="tl-phase">Phase 04 · Wachstum</div><h3>Skalieren</h3>
+            <p>Mehr Mitarbeiter oder Tage? Kein Problem — das Setup steht, ihr weitet
+              einfach aus.</p>
+            <ul><li>Mehr Mitarbeiter jederzeit dazunehmen</li><li>Weitere Standorte problemlos andocken</li><li>Kein erneuter Aufwand fürs Setup</li></ul>
+            <div class="tl-meta">Skaliert mit deinem Betrieb</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap"><div class="promise reveal">
+        <div class="eyebrow" style="color:var(--gold-text)">Unser Versprechen</div>
+        <h2 style="margin-top:12px">Transparent, planbar, steuerlich sauber — in jeder Phase.</h2>
+        <p>Keine versteckten Kosten, keine Überraschungen. Jeder Schritt ist so
+          dokumentiert, dass dein Steuerberater ihn prüfen kann.</p>
+      </div></div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal"><div class="eyebrow">Häufige Fragen</div><h2>Was Betriebe vorab wissen wollen.</h2></div>
+        <div class="faq reveal">
+          <details><summary>Wie schnell können wir starten?</summary><p>Platzhalter — hier echte Angabe ergänzen (z. B. „nach dem Erstgespräch in der Regel innerhalb von X Tagen").</p></details>
+          <details><summary>Muss mein Steuerberater eingebunden werden?</summary><p>Ja, und das ist gewollt: Wir setzen die Struktur so auf, dass sie von deinem Steuerberater geprüft und mitgetragen werden kann.</p></details>
+          <details><summary>Gibt es eine Mindestabnahme?</summary><p>Platzhalter — echte Konditionen/Mindestmengen hier einsetzen.</p></details>
+          <details><summary>Gibt es vegane oder wechselnde Sorten?</summary><p>Ja. Das Angebot wechselt und umfasst vegane Optionen — zum Beispiel das neue Gelbe Thai Curry.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final" style="padding-top:0">
+      <div class="wrap"><div class="reveal">
+        <div class="eyebrow">Nächster Schritt</div><h2 style="margin-top:16px">Bereit für Schritt 01?</h2>
+        <p>15 Minuten reichen, um deinen Bedarf zu klären und den Ablauf zu starten.</p>
+        <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
+      </div></div>
+    </section>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Ablauf</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+  </div>
+
+  <!-- ============ STEUERVORTEIL ============ -->
+  <div class="view" id="view-steuer">
+    <header class="hero hero--sub">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Steuervorteil</div>
+        <div class="eyebrow reveal">Mitarbeiterverpflegung mit Löwenanteil</div>
+        <h1 class="reveal" style="margin-top:16px">Mittagessen, das der Staat <span class="accent">mitbezahlt</span>.</h1>
+        <p class="lead reveal">Mit Löwenanteil bietest du deinem Team eine vollwertige Mahlzeit –
+          und nutzt dabei den steuerbegünstigten Essenszuschuss. 2026 sind bis zu
+          <strong>7,67 € pro Mitarbeiter und Arbeitstag</strong> steuerlich begünstigt und
+          sozialversicherungsfrei.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap"><div class="band reveal">
+        <div class="eyebrow" style="color:var(--gold-text)">Der Freibetrag 2026</div>
+        <h2>7,67 € pro Mitarbeiter und Arbeitstag.</h2>
+        <p>Der begünstigte Zuschuss setzt sich aus dem amtlichen Sachbezugswert und dem
+          steuerfreien Aufschlag zusammen – beides zusammen zahlt der Staat quasi mit.</p>
+        <div class="band-stats">
+          <div><div class="v">4,57 €</div><div class="k">amtlicher Sachbezugswert</div></div>
+          <div><div class="v">+ 3,10 €</div><div class="k">steuerfreier Zuschuss</div></div>
+          <div><div class="v">= 7,67 €</div><div class="k">pro Tag &amp; Mitarbeiter</div></div>
+        </div>
+      </div></div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Beispielrechnung</div>
+          <h2>10 Mitarbeiter, 2 Tage die Woche.</h2>
+          <p>Ein Betrieb bietet seinem Team an zwei Tagen pro Woche ein Löwenanteil-Gericht.
+            So sieht die Rechnung aus.</p>
+        </div>
+        <div class="grid-2">
+          <div class="table-wrap reveal">
+            <table class="ntable">
+              <caption>Annahmen</caption>
+              <tbody>
+                <tr><td>Mitarbeiter</td><td class="num">10</td></tr>
+                <tr><td>Verpflegungstage</td><td class="num">2 / Woche</td></tr>
+                <tr><td>Preis je Löwenanteil-Gericht</td><td class="num">9,99 €</td></tr>
+                <tr><td>Zuschuss Betrieb (max. begünstigt)</td><td class="num">7,67 € / Tag</td></tr>
+                <tr class="hl"><td>Eigenanteil Mitarbeiter</td><td class="num">2,32 € / Tag</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-wrap reveal">
+            <table class="ntable">
+              <caption>Was der Betrieb einsetzt</caption>
+              <tbody>
+                <tr><td>Arbeitstage / Monat (2 × 52 ÷ 12)</td><td class="num">≈ 8,7</td></tr>
+                <tr><td>Zuschuss je Mitarbeiter / Monat</td><td class="num">≈ 67 €</td></tr>
+                <tr><td>Alle 10 Mitarbeiter / Monat</td><td class="num">≈ 667 €</td></tr>
+                <tr class="hl"><td>Pro Jahr</td><td class="num">≈ 8.000 €</td></tr>
+                <tr><td>… davon Betriebsausgabe</td><td class="num">100 %</td></tr>
+                <tr><td>… Sozialabgaben darauf</td><td class="num">0 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Zuschuss statt Gehaltserhöhung</div>
+          <h2>Gleicher Einsatz — fast doppelt so viel beim Team.</h2>
+          <p>Der Vergleich pro Mitarbeiter und Monat: 67 € als Essenszuschuss gegen 67 €
+            brutto mehr Gehalt.</p>
+        </div>
+        <div class="table-wrap reveal">
+          <table class="ntable">
+            <thead>
+              <tr><th>Pro Mitarbeiter / Monat</th><th class="num">Essenszuschuss</th><th class="num">Gehaltserhöhung</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Einsatz brutto</td><td class="num">67 €</td><td class="num">67 €</td></tr>
+              <tr><td>Steuern &amp; Sozialabgaben</td><td class="num">keine*</td><td class="num">fällig</td></tr>
+              <tr class="hl"><td>Kommt beim Mitarbeiter an</td><td class="num">≈ 67 €</td><td class="num">≈ 35 €</td></tr>
+              <tr><td>Kosten Arbeitgeber inkl. Lohnnebenkosten</td><td class="num">≈ 67 €</td><td class="num">≈ 80 €</td></tr>
+              <tr><td>Als Betriebsausgabe absetzbar</td><td class="num">ja</td><td class="num">ja</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note reveal">* Der Zuschuss ist sozialversicherungsfrei; der
+          Sachbezugswert-Anteil wird ggf. pauschal mit 25 % versteuert. Netto-Werte sind
+          Durchschnittswerte und hängen von Steuerklasse und Verdienst ab.</div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Aus Sicht des Mitarbeiters</div>
+          <h2>Eine vollwertige Mahlzeit für rund einen Euro.</h2>
+          <p>Der Eigenanteil des Mitarbeiters wird vom Bruttogehalt einbehalten. Dadurch
+            sinkt sein zu versteuerndes Einkommen — netto kostet das Essen kaum etwas.</p>
+        </div>
+        <div class="table-wrap reveal" style="max-width:560px">
+          <table class="ntable">
+            <caption>Ein Löwenanteil-Gericht</caption>
+            <tbody>
+              <tr><td>Wert des Gerichts</td><td class="num">9,99 €</td></tr>
+              <tr><td>Zuschuss Arbeitgeber</td><td class="num">− 7,67 €</td></tr>
+              <tr><td>Eigenanteil (vom Bruttogehalt)</td><td class="num">2,32 €</td></tr>
+              <tr><td>Ersparnis Steuer &amp; Sozialabgaben (≈ 48 %)</td><td class="num">− ≈ 1,10 €</td></tr>
+              <tr class="hl"><td>Netto-Kosten fürs Mittagessen</td><td class="num">≈ 1,20 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="eyebrow">Mehr als Steuern sparen</div>
+          <h2>Was gemeinsames Essen im Betrieb bewirkt.</h2>
+        </div>
+        <div class="pillars-3">
+          <div class="pillar reveal"><h3>Kein Mittagstief</h3><p>Ein warmes, ausgewogenes Essen hält das Team am Nachmittag leistungsfähig.</p></div>
+          <div class="pillar reveal"><h3>Gemeinsam essen verbindet</h3><p>Die gemeinsame Mittagspause schafft ein echtes Ritual — das stärkt den Zusammenhalt.</p></div>
+          <div class="pillar reveal"><h3>Sichtbarer Benefit</h3><p>Ein Vorteil, den jeder täglich spürt — gut für Bindung und Recruiting.</p></div>
+        </div>
+        <div class="promise reveal" style="margin-top:26px">
+          <div class="eyebrow" style="color:var(--gold-text)">Ersparnis bei den Sozialabgaben</div>
+          <h2 style="margin-top:12px">Rund 130 € pro Monat, ca. 1.560 € im Jahr.</h2>
+          <p>Weil der Zuschuss sozialversicherungsfrei ist, spart der Betrieb im Beispiel
+            den Arbeitgeber-Anteil (rund 20 %) auf den gesamten Zuschuss — Geld, das bei
+            einer klassischen Gehaltserhöhung an die Sozialkassen ginge.</p>
+        </div>
+        <div class="note reveal">Hinweis: Diese Seite ersetzt keine Steuerberatung. Werte
+          nach Sozialversicherungsentgeltverordnung 2026; die Umsetzung wird individuell
+          mit deinem Steuerberater abgestimmt.</div>
+      </div>
+    </section>
+
+    <section class="cta-final" style="padding-top:0">
+      <div class="wrap"><div class="reveal">
+        <div class="eyebrow">Nächster Schritt</div><h2 style="margin-top:16px">Rechnen wir's für dein Team durch.</h2>
+        <p>Sag uns Mitarbeiterzahl und Tage — wir zeigen dir deine konkrete Ersparnis.</p>
+        <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
+      </div></div>
+    </section>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Steuervorteil</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+  </div>
+
+  <!-- ============ PARTNER ============ -->
+  <div class="view" id="view-partner">
+    <header class="hero hero--sub">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Partner</div>
+        <div class="eyebrow reveal">Für wen</div>
+        <h1 class="reveal" style="margin-top:16px">Gemacht für Betriebe, die ihr <span class="accent">Team</span> gut verpflegen.</h1>
+        <p class="lead reveal">Egal welche Branche: Wenn du deinem Team ein gutes Mittagessen
+          bieten und dabei Steuern sparen willst, bist du bei Next Supply richtig.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head reveal"><div class="eyebrow">Für wen</div><h2>Wen wir verpflegen.</h2></div>
+        <div class="pillars">
+          <div class="pillar reveal"><div class="tag">Für</div><h3>Büro &amp; Agentur</h3><p>Eine vollwertige Mahlzeit statt Lieferdienst-Chaos — gut fürs Team und die Konzentration.</p></div>
+          <div class="pillar reveal"><div class="tag">Für</div><h3>Handwerk &amp; Produktion</h3><p>Ordentliche Verpflegung für alle, die körperlich anpacken.</p></div>
+          <div class="pillar reveal"><div class="tag">Für</div><h3>Praxen &amp; Kanzleien</h3><p>Gemeinsame Pause ohne Aufwand — ein spürbarer Benefit im Alltag.</p></div>
+          <div class="pillar reveal"><div class="tag">Für</div><h3>Kleine &amp; mittlere Betriebe</h3><p>Großer Benefit, kein eigener Kantinen-Aufwand.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap"><div class="promise reveal">
+        <div class="eyebrow" style="color:var(--gold-text)">Partner werden</div>
+        <h2 style="margin-top:12px">In einem Gespräch geklärt, ob's passt.</h2>
+        <p>Kurzer Bedarfs-Check, transparente Konditionen, sauberer Start — ohne
+          langfristige Knebelverträge.</p>
+        <div class="band-cta"><a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Partner-Gespräch anfragen →</a></div>
+      </div></div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap"><div class="trust reveal">
+        <span>Next Supply UG</span><span>·</span><span>Mitarbeiterverpflegung</span><span>·</span>
+        <span>Löwenanteil</span><span>·</span><span>Essenszuschuss 2026</span>
+      </div></div>
+    </section>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Partner</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+  </div>
+
+  <!-- ============ ÜBER UNS ============ -->
+  <div class="view" id="view-ueber">
+    <header class="hero hero--sub">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Über uns</div>
+        <div class="eyebrow reveal">Wer wir sind</div>
+        <h1 class="reveal" style="margin-top:16px">Zwei Gründer, ein <span class="accent">Anspruch</span>.</h1>
+        <p class="lead reveal">Next Supply steht für B2B-Foodlogistik, die mehr kann als
+          Ware von A nach B — verlässlich, transparent und wirtschaftlich durchdacht.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap"><div class="about-grid">
+        <div class="about-lead reveal">
+          <p>Next Supply ist aus der Überzeugung entstanden, dass gute Mitarbeiter­verpflegung
+            weder teuer noch kompliziert sein muss. Wir verbinden vollwertige Mahlzeiten mit
+            einer Struktur, die Betrieben und Teams echtes Geld spart.</p>
+          <p>Als inhabergeführtes Unternehmen sind wir nah dran: feste Ansprechpartner,
+            kurze Wege, ehrliche Konditionen. <span class="ph" title="Platzhalter">Hier eure echte Gründungs- und Werte-Geschichte ergänzen.</span></p>
+        </div>
+        <div class="manifest reveal">
+          <div class="m-head"><span>Eckdaten</span><span>NXS</span></div>
+          <div class="m-row"><span class="k">Gegründet</span><span class="v" style="font-size:20px">2026</span></div>
+          <div class="m-row"><span class="k">Sitz</span><span class="v" style="font-size:18px">Bremen</span></div>
+          <div class="m-row"><span class="k">Geschäftsfelder</span><span class="v" style="font-size:16px">Vertrieb · Fundraising</span></div>
+        </div>
+      </div></div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal"><div class="eyebrow">Die Gründer</div><h2>Die Menschen hinter Next Supply.</h2></div>
+        <div class="steckbrief-grid">
+          <div class="steckbrief reveal">
+            <div class="sb-head">
+              <div class="sb-ava">AV</div>
+              <div>
+                <div class="sb-name">Alexander Vergiehn</div>
+                <div class="sb-role">Gründer &amp; Geschäftsführer · Next Supply</div>
+              </div>
+            </div>
+            <dl class="sb-facts">
+              <div><dt>Sitz</dt><dd>Bremen</dd></div>
+              <div><dt>Schwerpunkt</dt><dd>Vertrieb &amp; Steuersparmodell</dd></div>
+              <div><dt>Kommt aus</dt><dd>Vertrieb &amp; Fundraising</dd></div>
+              <div><dt>Arbeitsweise</dt><dd>Direkt, pragmatisch, ohne Umwege</dd></div>
+              <div><dt>Motto</dt><dd>„Nicht lange zerreden — bauen."</dd></div>
+            </dl>
+            <p class="sb-text">Ich bin jemand, der Ideen nicht lange zerredet, sondern baut.
+              Mein Antrieb kommt aus Vertrieb und Fundraising: Ich will keine Produkte
+              verkaufen, sondern Lösungen, die für beide Seiten wirklich aufgehen. Direkt,
+              pragmatisch und ohne Umwege — Hauptsache, am Ende steht etwas, das funktioniert
+              und Menschen weiterbringt.</p>
+          </div>
+          <div class="steckbrief reveal">
+            <div class="sb-head">
+              <div class="sb-ava">HA</div>
+              <div>
+                <div class="sb-name">Hussein Al&nbsp;Ezzi</div>
+                <div class="sb-role">Gründer &amp; Gesellschafter · Next Supply</div>
+              </div>
+            </div>
+            <dl class="sb-facts">
+              <div><dt>Sitz</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
+              <div><dt>Schwerpunkt</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
+              <div><dt>Kommt aus</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
+              <div><dt>Arbeitsweise</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
+              <div><dt>Motto</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
+            </dl>
+            <p class="sb-text"><span class="ph" title="ergänzen">Kurzer persönlicher Text über Suna – hier 2–3 Sätze ergänzen.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head reveal"><div class="eyebrow">Wofür wir stehen</div><h2>Unsere Werte.</h2></div>
+        <div class="pillars-3">
+          <div class="pillar reveal"><h3>Verlässlichkeit</h3><p>Zugesagt ist geliefert. Feste Termine, feste Ansprechpartner.</p></div>
+          <div class="pillar reveal"><h3>Transparenz</h3><p>Klare Konditionen, sauber dokumentiert — nichts im Kleingedruckten.</p></div>
+          <div class="pillar reveal"><h3>Partnerschaft</h3><p>Wir wachsen mit unseren Kunden, statt sie zu binden.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final" style="padding-top:0">
+      <div class="wrap"><div class="reveal">
+        <div class="eyebrow">Kennenlernen</div><h2 style="margin-top:16px">Lern uns persönlich kennen.</h2>
+        <p>Ein kurzes Gespräch sagt mehr als jede Seite.</p>
+        <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
+      </div></div>
+    </section>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Über uns</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+  </div>
+
+  <!-- ============ KONTAKT ============ -->
+  <div class="view" id="view-kontakt">
+    <header class="hero hero--sub">
+      <div class="wrap">
+        <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Kontakt</div>
+        <div class="eyebrow reveal">Kontakt</div>
+        <h1 class="reveal" style="margin-top:16px">Lass uns über dein <span class="accent">Team</span> sprechen.</h1>
+        <p class="lead reveal">Sag uns kurz, wie viele Mitarbeiter du verpflegen möchtest —
+          wir melden uns mit einer konkreten Einschätzung deiner Ersparnis.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="contact-grid">
+          <div class="reveal">
+            <div class="embed-placeholder">
+              <div class="eyebrow" style="color:var(--gold-text)">Kontaktformular</div>
+              <h3>Hier läuft dein Anfrage-Formular.</h3>
+              <p>Auf der Live-Website ist an dieser Stelle das Formular direkt eingebettet —
+                jede Anfrage landet automatisch als Lead im CRM. In dieser Vorschau öffnest
+                du es in einem neuen Tab:</p>
+              <a href="https://tally.so/r/aQXLpq" target="_blank" rel="noopener" class="btn btn-primary">Formular öffnen →</a>
+              <p class="embed-note">Prototyp-Vorschau · echter Embed rendert auf next-supply.de</p>
+            </div>
+          </div>
+
+          <aside class="contact-card reveal">
+            <div class="eyebrow" style="color:var(--gold-text)">Direkt</div>
+            <h3 style="margin-top:10px">So erreichst du uns</h3>
+            <div class="ci"><span class="k">E-Mail</span><a href="mailto:kontakt@next-supply.de">kontakt@next-supply.de</a></div>
+            <div class="ci"><span class="k">Sitz</span><span>Bremen</span></div>
+            <div class="ci"><span class="k">Antwort</span><span>meist am selben Werktag</span></div>
+            <hr class="ci-sep">
+            <div class="eyebrow" style="color:var(--gold-text)">Was danach passiert</div>
+            <ol class="ci-steps">
+              <li>Kurzes Gespräch zu Team &amp; Tagen</li>
+              <li>Ersparnis-Rechnung für deinen Fall</li>
+              <li>Sauberes Setup mit deinem Steuerberater</li>
+            </ol>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Kontakt</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+  </div>
+
+
+<style>
+  .legal{max-width:760px}
+  .legal h3.lh{font-family:var(--f-display);font-weight:800;font-size:20px;margin:30px 0 8px;color:var(--ink)}
+  .legal h3.lh.big{font-size:26px;margin-top:44px}
+  .legal p{margin:9px 0}
+  .legal p.soft{color:var(--ink-soft);font-size:16px}
+  .legal p.caps{text-transform:uppercase;font-size:13px;letter-spacing:.01em;color:var(--ink-soft)}
+  .legal .addr{margin:9px 0}
+</style>
+
+<!-- ============ IMPRESSUM ============ -->
+<div class="view" id="view-impressum">
+  <header class="hero hero--sub">
+    <div class="wrap">
+      <div class="crumb"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Impressum</div>
+      <div class="eyebrow">Rechtliches</div>
+      <h1 style="margin-top:16px">Impressum</h1>
+    </div>
+  </header>
+  <section style="padding-top:56px">
+    <div class="wrap legal">
+      <h3 class="lh">Angaben gem&auml;&szlig; &sect; 5 DDG</h3>
+      <p class="addr">Next Supply UG (haftungsbeschr&auml;nkt)<br>Am Waldesrand 6<br>28844 Weyhe</p>
+      <h3 class="lh">Vertreten durch den Gesch&auml;ftsf&uuml;hrer</h3>
+      <p>Alexander Vergiehn</p>
+      <h3 class="lh">Kontakt</h3>
+      <p>Telefon: 0176 30555295<br>E-Mail: kontakt@next-supply.de</p>
+      <h3 class="lh">Handelsregister</h3>
+      <p>Registergericht: Amtsgericht Walsrode<br>Registernummer: HRB 213737</p>
+      <h3 class="lh">Umsatzsteuer-ID</h3>
+      <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27a UStG:<br>[USt-IdNr nachtragen]</p>
+      <h3 class="lh">Verantwortlich f&uuml;r den Inhalt nach &sect; 18 Abs. 2 MStV</h3>
+      <p>Alexander Vergiehn, Anschrift wie oben</p>
+      <h3 class="lh">Haftung f&uuml;r Inhalte</h3>
+      <p class="soft">Die Inhalte dieser Seiten wurden mit gr&ouml;&szlig;ter Sorgfalt erstellt. F&uuml;r die Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t der Inhalte k&ouml;nnen wir jedoch keine Gew&auml;hr &uuml;bernehmen. Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs. 1 DDG f&uuml;r eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit hinweisen.</p>
+      <h3 class="lh">Haftung f&uuml;r Links</h3>
+      <p class="soft">Unser Angebot enth&auml;lt gegebenenfalls Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. F&uuml;r diese fremden Inhalte k&ouml;nnen wir keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.</p>
+      <h3 class="lh">Urheberrecht</h3>
+      <p class="soft">Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechts bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+      <p style="margin-top:30px"><a href="#/" data-nav class="more">&larr; Zur&uuml;ck zur Startseite</a></p>
+    </div>
+  </section>
+  <footer><div class="wrap"><span>&copy; 2026 Next Supply UG &middot; Impressum</span><span><a href="#/datenschutz" data-nav>Datenschutz</a> &middot; <a href="#/" data-nav>Startseite</a></span></div></footer>
+</div>
+
+<!-- ============ DATENSCHUTZ ============ -->
+<div class="view" id="view-datenschutz">
+  <header class="hero hero--sub">
+    <div class="wrap">
+      <div class="crumb"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Datenschutz</div>
+      <div class="eyebrow">Rechtliches</div>
+      <h1 style="margin-top:16px">Datenschutzerkl&auml;rung</h1>
+    </div>
+  </header>
+  <section style="padding-top:48px">
+    <div class="wrap legal">
+
+      <h3 class="lh big">1. Datenschutz auf einen Blick</h3>
+      <h3 class="lh">Allgemeine Hinweise</h3>
+      <p class="soft">Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie pers&ouml;nlich identifiziert werden k&ouml;nnen. Ausf&uuml;hrliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgef&uuml;hrten Datenschutzerkl&auml;rung.</p>
+      <h3 class="lh">Datenerfassung auf dieser Website</h3>
+      <p><strong>Wer ist verantwortlich f&uuml;r die Datenerfassung auf dieser Website?</strong></p>
+      <p class="soft">Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten k&ouml;nnen Sie dem Abschnitt &bdquo;Hinweis zur verantwortlichen Stelle&ldquo; in dieser Datenschutzerkl&auml;rung entnehmen.</p>
+      <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
+      <p class="soft">Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.&nbsp;B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.</p>
+      <p><strong>Wof&uuml;r nutzen wir Ihre Daten?</strong></p>
+      <p class="soft">Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gew&auml;hrleisten. Andere Daten k&ouml;nnen zur Analyse Ihres Nutzerverhaltens verwendet werden. Sofern &uuml;ber die Website Vertr&auml;ge geschlossen oder angebahnt werden k&ouml;nnen, werden die &uuml;bermittelten Daten auch f&uuml;r Vertragsangebote, Bestellungen oder sonstige Auftragsanfragen verarbeitet.</p>
+      <p><strong>Welche Rechte haben Sie bez&uuml;glich Ihrer Daten?</strong></p>
+      <p class="soft">Sie haben jederzeit das Recht, unentgeltlich Auskunft &uuml;ber Herkunft, Empf&auml;nger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben au&szlig;erdem ein Recht, die Berichtigung oder L&ouml;schung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, k&ouml;nnen Sie diese Einwilligung jederzeit f&uuml;r die Zukunft widerrufen. Au&szlig;erdem haben Sie das Recht, unter bestimmten Umst&auml;nden die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde zu. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz k&ouml;nnen Sie sich jederzeit an uns wenden.</p>
+
+      <h3 class="lh big">2. Hosting</h3>
+      <p class="soft">Wir hosten die Inhalte unserer Website bei folgendem Anbieter:</p>
+      <h3 class="lh">Externes Hosting</h3>
+      <p class="soft">Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.&nbsp;a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die &uuml;ber eine Website generiert werden, handeln. Das externe Hosting erfolgt zum Zwecke der Vertragserf&uuml;llung gegen&uuml;ber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO). Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschlie&szlig;lich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und &sect; 25 Abs. 1 TDDDG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endger&auml;t des Nutzers (z.&nbsp;B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit widerrufbar.</p>
+      <p class="soft">Wir setzen folgenden Hoster ein:</p>
+      <p class="addr">Vercel Inc.<br>340 S Lemon Ave #4133<br>Walnut, CA 91789<br>USA</p>
+      <h3 class="lh">Auftragsverarbeitung</h3>
+      <p class="soft">Wir haben einen Vertrag &uuml;ber Auftragsverarbeitung (AVV) zur Nutzung des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gew&auml;hrleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.</p>
+
+      <h3 class="lh big">3. Allgemeine Hinweise und Pflichtinformationen</h3>
+      <h3 class="lh">Datenschutz</h3>
+      <p class="soft">Die Betreiber dieser Seiten nehmen den Schutz Ihrer pers&ouml;nlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerkl&auml;rung. Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Wir weisen darauf hin, dass die Daten&uuml;bertragung im Internet (z.&nbsp;B. bei der Kommunikation per E-Mail) Sicherheitsl&uuml;cken aufweisen kann. Ein l&uuml;ckenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht m&ouml;glich.</p>
+      <h3 class="lh">Hinweis zur verantwortlichen Stelle</h3>
+      <p class="soft">Die verantwortliche Stelle f&uuml;r die Datenverarbeitung auf dieser Website ist:</p>
+      <p class="addr">Next Supply UG (haftungsbeschr&auml;nkt)<br>Am Waldesrand 6<br>28844 Weyhe<br>Vertreten durch: Alexander Vergiehn (Gesch&auml;ftsf&uuml;hrer)<br>Telefon: 0176 30555295<br>E-Mail: kontakt@next-supply.de</p>
+      <p class="soft">Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person, die allein oder gemeinsam mit anderen &uuml;ber die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+      <h3 class="lh">Speicherdauer</h3>
+      <p class="soft">Soweit innerhalb dieser Datenschutzerkl&auml;rung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck f&uuml;r die Datenverarbeitung entf&auml;llt. Wenn Sie ein berechtigtes L&ouml;schersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gel&ouml;scht, sofern wir keine anderen rechtlich zul&auml;ssigen Gr&uuml;nde f&uuml;r die Speicherung haben (z.&nbsp;B. steuer- oder handelsrechtliche Aufbewahrungsfristen).</p>
+      <h3 class="lh">Empf&auml;nger von personenbezogenen Daten</h3>
+      <p class="soft">Im Rahmen unserer Gesch&auml;ftst&auml;tigkeit arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei ist teilweise auch eine &Uuml;bermittlung von personenbezogenen Daten an diese externen Stellen erforderlich. Wir geben personenbezogene Daten nur dann an externe Stellen weiter, wenn dies im Rahmen einer Vertragserf&uuml;llung erforderlich ist, wenn wir gesetzlich hierzu verpflichtet sind, wenn wir ein berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die Datenweitergabe erlaubt. Beim Einsatz von Auftragsverarbeitern geben wir personenbezogene Daten nur auf Grundlage eines g&uuml;ltigen Vertrags &uuml;ber Auftragsverarbeitung weiter.</p>
+      <h3 class="lh">Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
+      <p class="soft">Viele Datenverarbeitungsvorg&auml;nge sind nur mit Ihrer ausdr&uuml;cklichen Einwilligung m&ouml;glich. Sie k&ouml;nnen eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtm&auml;&szlig;igkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unber&uuml;hrt.</p>
+      <h3 class="lh">Widerspruchsrecht (Art. 21 DSGVO)</h3>
+      <p class="caps">Wenn die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit das Recht, aus Gr&uuml;nden, die sich aus Ihrer besonderen Situation ergeben, gegen die Verarbeitung Ihrer personenbezogenen Daten Widerspruch einzulegen; dies gilt auch f&uuml;r ein auf diese Bestimmungen gest&uuml;tztes Profiling (Widerspruch nach Art. 21 Abs. 1 DSGVO). Werden Ihre personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, so haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten zum Zwecke derartiger Werbung einzulegen (Widerspruch nach Art. 21 Abs. 2 DSGVO).</p>
+      <h3 class="lh">Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde</h3>
+      <p class="soft">Im Falle von Verst&ouml;&szlig;en gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbeh&ouml;rde zu, insbesondere in dem Mitgliedstaat ihres gew&ouml;hnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutma&szlig;lichen Versto&szlig;es.</p>
+      <h3 class="lh">Auskunft, Berichtigung und L&ouml;schung</h3>
+      <p class="soft">Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft &uuml;ber Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empf&auml;nger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder L&ouml;schung dieser Daten.</p>
+      <h3 class="lh">Recht auf Einschr&auml;nkung der Verarbeitung</h3>
+      <p class="soft">Sie haben das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu k&ouml;nnen Sie sich jederzeit an uns wenden.</p>
+      <h3 class="lh">SSL- bzw. TLS-Verschl&uuml;sselung</h3>
+      <p class="soft">Diese Seite nutzt aus Sicherheitsgr&uuml;nden und zum Schutz der &Uuml;bertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschl&uuml;sselung. Eine verschl&uuml;sselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von &bdquo;http://&ldquo; auf &bdquo;https://&ldquo; wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+
+      <h3 class="lh big">4. Datenerfassung auf dieser Website</h3>
+      <h3 class="lh">Kontaktformular</h3>
+      <p class="soft">Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und f&uuml;r den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erf&uuml;llung eines Vertrags zusammenh&auml;ngt oder zur Durchf&uuml;hrung vorvertraglicher Ma&szlig;nahmen erforderlich ist. In allen &uuml;brigen F&auml;llen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
+      <h3 class="lh">Anfrage per E-Mail oder Telefon</h3>
+      <p class="soft">Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Ma&szlig;nahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) oder Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO.</p>
+      <h3 class="lh">Terminvereinbarung (&bdquo;Google Termine&ldquo;)</h3>
+      <p class="soft">Auf unserer Website haben Sie die M&ouml;glichkeit, &uuml;ber einen Link Termine (z.&nbsp;B. ein kostenloses Erstgespr&auml;ch) mit uns zu vereinbaren. F&uuml;r die Terminplanung nutzen wir die Terminfunktion von Google. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Wenn Sie einen Termin buchen, werden die von Ihnen angegebenen Daten (z.&nbsp;B. Name, E-Mail-Adresse, Zeitpunkt und Anlass des Termins) zum Zwecke der Vereinbarung und Durchf&uuml;hrung des Termins verarbeitet und in unserem Google-Kalender gespeichert. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO bzw. Art. 6 Abs. 1 lit. f DSGVO; sofern eine Einwilligung abgefragt wurde, auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO. Soweit Daten in die USA &uuml;bermittelt werden, st&uuml;tzt sich die &Uuml;bermittlung auf die Standardvertragsklauseln der EU-Kommission. Details: https://policies.google.com/privacy.</p>
+
+      <p class="soft"style="margin-top:26px;font-size:14px">Quelle: Standardbausteine auf Basis e-recht24.de</p>
+      <p style="margin-top:22px"><a href="#/" data-nav class="more">&larr; Zur&uuml;ck zur Startseite</a></p>
+    </div>
+  </section>
+  <footer><div class="wrap"><span>&copy; 2026 Next Supply UG &middot; Datenschutz</span><span><a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/" data-nav>Startseite</a></span></div></footer>
+</div>
+
+</div>
+
+<script>
+  (function(){
+    var pages=['home','modell','ablauf','steuer','partner','ueber','kontakt','impressum','datenschutz'];
+    var views={};pages.forEach(function(p){views[p]=document.getElementById('view-'+p);});
+    var hashToPage={'':'home','#/':'home','#/modell':'modell','#/ablauf':'ablauf',
+      '#/steuer':'steuer','#/partner':'partner','#/ueber-uns':'ueber','#/kontakt':'kontakt',
+      '#/impressum':'impressum','#/datenschutz':'datenschutz'};
+    var navLinks=document.querySelectorAll('.nav-links a[data-page]');
+
+    function reveal(scope){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+      },{threshold:.12});
+      scope.querySelectorAll('.reveal:not(.in)').forEach(function(el){io.observe(el);});
+    }
+    function show(page){
+      if(!views[page]) page='home';
+      pages.forEach(function(p){views[p].classList.toggle('active',p===page);});
+      navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-page')===page);});
+      reveal(views[page]);
+      window.scrollTo({top:0,left:0});
+    }
+    function route(){show(hashToPage[location.hash||'']||'home');}
+
+    document.addEventListener('click',function(e){
+      var a=e.target.closest('a[data-nav]');if(!a) return;
+      var href=a.getAttribute('href');
+      if(href && href.charAt(0)==='#'){
+        e.preventDefault();
+        if(location.hash!==href) location.hash=href; else route();
+      }
+    });
+    window.addEventListener('hashchange',route);
+    route();
+  })();
+
+  (function(){
+    var f=document.getElementById('kontaktForm');
+    if(!f) return;
+    var labels={name:'Name',firma:'Firma',email:'E-Mail',telefon:'Telefon',mitarbeiter:'Mitarbeiter',tage:'Tage/Woche',nachricht:'Nachricht'};
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!f.checkValidity()){f.reportValidity();return;}
+      var d=new FormData(f),lines=[];
+      ['name','firma','email','telefon','mitarbeiter','tage','nachricht'].forEach(function(k){
+        var v=(d.get(k)||'').toString().trim();
+        if(v) lines.push(labels[k]+': '+v);
+      });
+      var who=((d.get('firma')||d.get('name')||'').toString().trim());
+      var subject=encodeURIComponent('Anfrage Mitarbeiterverpflegung — '+who);
+      var body=encodeURIComponent(lines.join('\n'));
+      window.location.href='mailto:kontakt@next-supply.de?subject='+subject+'&body='+body;
+      f.style.display='none';
+      var s=document.getElementById('formSuccess');if(s) s.style.display='block';
+    });
+  })();
+</script>
+
+</body></html>
