@@ -28,7 +28,11 @@
   h1,h2,h3{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;text-wrap:balance;margin:0}
   .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text)}
   .view{display:none}
-  .view.active{display:block}
+  .view.active{display:block;animation:viewIn .34s ease}
+  @keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .nav{transition:background .2s ease,box-shadow .2s ease}
+  .nav.scrolled{background:color-mix(in srgb,var(--paper) 96%,transparent);box-shadow:0 3px 14px -8px rgba(31,27,22,.25)}
+  @media(prefers-reduced-motion:reduce){.view.active{animation:none}}
 
   /* nav */
   .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
@@ -1068,6 +1072,8 @@
     if(!tog||!nav) return;
     tog.addEventListener('click',function(){var o=nav.classList.toggle('open');tog.setAttribute('aria-expanded',o?'true':'false');});
     nav.addEventListener('click',function(e){if(e.target.closest('a[data-nav]')){nav.classList.remove('open');tog.setAttribute('aria-expanded','false');}});
+    var sc=function(){nav.classList.toggle('scrolled',window.scrollY>6);};
+    window.addEventListener('scroll',sc,{passive:true}); sc();
   })();
 </script>
 </body></html>
