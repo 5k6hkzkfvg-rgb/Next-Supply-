@@ -89,7 +89,7 @@
   .m-row:last-child{border-bottom:0}
   .m-row .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
   .m-row .v{font-family:var(--f-display);font-weight:800;font-size:26px;color:var(--ink);font-variant-numeric:tabular-nums}
-  .m-row .v small{font-size:13px;color:var(--red);font-weight:700}
+  .m-row .v small{font-size:13px;color:var(--red);font-weight:700;margin-left:4px}
 
   section{padding:100px 0}
   .sec-head{max-width:60ch;margin-bottom:56px}
@@ -115,6 +115,9 @@
     border:1.5px solid var(--gold);border-radius:1px;transform:rotate(45deg)}
   .more{display:inline-block;margin-top:20px;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;
     letter-spacing:.05em;color:var(--red);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;cursor:pointer}
+  #view-home .pillar{transition:border-color .15s ease,box-shadow .15s ease}
+  #view-home .pillar:hover{border-color:color-mix(in srgb,var(--gold) 55%,var(--hairline));
+    box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 6%,transparent)}
 
   /* band */
   .band{background:var(--surface-2);color:var(--ink);border-radius:10px;padding:60px 52px;
@@ -172,7 +175,7 @@
   @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:34px}}
   .about-lead{font-size:20px;line-height:1.65;color:var(--ink)}
   .about-lead p{margin:0 0 18px}
-  .about-lead p:last-child{margin-bottom:0;color:var(--ink-soft)}
+  .about-lead p:last-child{margin-bottom:0}
   .team{display:grid;grid-template-columns:1fr 1fr;gap:26px}
   @media(max-width:680px){.team{grid-template-columns:1fr}}
   .member{background:var(--surface);border:1px solid var(--hairline);border-radius:6px;padding:32px 30px;position:relative;overflow:hidden}
@@ -307,7 +310,7 @@
             </div>
           </div>
           <div class="manifest reveal" aria-label="Kennzahlen">
-            <div class="m-head"><span>Manifest</span><span>NXS-VTR</span></div>
+            <div class="m-head"><span>Kennzahlen</span><span>NXS-VTR</span></div>
             <div class="m-row"><span class="k">Zuschuss / Tag</span><span class="v">7,67<small>€</small></span></div>
             <div class="m-row"><span class="k">Lieferzeit</span><span class="v">3–4<small>Werktage</small></span></div>
             <div class="m-row"><span class="k">Aktive Partner</span><span class="v">1</span></div>
@@ -347,7 +350,7 @@
           </div>
           <div class="pillar reveal">
             <div class="tag">04 — Partner</div>
-            <h3>Für wen wir kochen</h3>
+            <h3>Für wen es gemacht ist</h3>
             <p>Für Betriebe jeder Größe, die ihrem Team ein gutes Mittagessen bieten wollen.</p>
             <a href="#/partner" class="more" data-nav>Partner werden →</a>
           </div>
@@ -370,7 +373,7 @@
       <div class="wrap">
         <div class="reveal">
           <div class="eyebrow">Nächster Schritt</div>
-          <h2 style="margin-top:16px">Lass uns dein Beschaffungs­modell durchrechnen.</h2>
+          <h2 style="margin-top:16px">Lass uns dein Sparpotenzial durchrechnen.</h2>
           <p>15 Minuten reichen, um zu sehen, was das Modell für deinen Betrieb bedeutet.</p>
           <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
         </div>
@@ -461,7 +464,7 @@
     <header class="hero hero--sub">
       <div class="wrap">
         <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Ablauf</div>
-        <div class="eyebrow reveal">Von der Anfrage bis zur Rampe</div>
+        <div class="eyebrow reveal">Von der Anfrage bis zum Mittagstisch</div>
         <h1 class="reveal" style="margin-top:16px">So arbeiten wir <span class="accent">zusammen</span>.</h1>
         <p class="lead reveal">Kein Blindflug: Jeder Schritt ist klar, planbar und von
           Anfang an steuerlich sauber aufgesetzt.</p>
@@ -696,7 +699,7 @@
 
     <section>
       <div class="wrap">
-        <div class="sec-head reveal"><div class="eyebrow">Für wen</div><h2>Wen wir verpflegen.</h2></div>
+        <div class="sec-head reveal"><div class="eyebrow">Zielgruppen</div><h2>Wen wir verpflegen.</h2></div>
         <div class="pillars">
           <div class="pillar reveal"><div class="tag">Für</div><h3>Büro &amp; Agentur</h3><p>Eine vollwertige Mahlzeit statt Lieferdienst-Chaos — gut fürs Team und die Konzentration.</p></div>
           <div class="pillar reveal"><div class="tag">Für</div><h3>Handwerk &amp; Produktion</h3><p>Ordentliche Verpflegung für alle, die körperlich anpacken.</p></div>
@@ -732,8 +735,9 @@
         <div class="crumb reveal"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Über uns</div>
         <div class="eyebrow reveal">Wer wir sind</div>
         <h1 class="reveal" style="margin-top:16px">Zwei Gründer, ein <span class="accent">Anspruch</span>.</h1>
-        <p class="lead reveal">Next Supply steht für B2B-Foodlogistik, die mehr kann als
-          Ware von A nach B — verlässlich, transparent und wirtschaftlich durchdacht.</p>
+        <p class="lead reveal">Hinter Next Supply stehen zwei Gründer mit demselben Anspruch:
+          gute Mitarbeiterverpflegung, die für Betrieb und Team wirklich aufgeht —
+          verlässlich, transparent und wirtschaftlich durchdacht.</p>
       </div>
     </header>
 
@@ -909,27 +913,6 @@
     });
     window.addEventListener('hashchange',route);
     route();
-  })();
-
-  (function(){
-    var f=document.getElementById('kontaktForm');
-    if(!f) return;
-    var labels={name:'Name',firma:'Firma',email:'E-Mail',telefon:'Telefon',mitarbeiter:'Mitarbeiter',tage:'Tage/Woche',nachricht:'Nachricht'};
-    f.addEventListener('submit',function(e){
-      e.preventDefault();
-      if(!f.checkValidity()){f.reportValidity();return;}
-      var d=new FormData(f),lines=[];
-      ['name','firma','email','telefon','mitarbeiter','tage','nachricht'].forEach(function(k){
-        var v=(d.get(k)||'').toString().trim();
-        if(v) lines.push(labels[k]+': '+v);
-      });
-      var who=((d.get('firma')||d.get('name')||'').toString().trim());
-      var subject=encodeURIComponent('Anfrage Mitarbeiterverpflegung — '+who);
-      var body=encodeURIComponent(lines.join('\n'));
-      window.location.href='mailto:kontakt@next-supply.de?subject='+subject+'&body='+body;
-      f.style.display='none';
-      var s=document.getElementById('formSuccess');if(s) s.style.display='block';
-    });
   })();
 </script>
 <script src="https://tally.so/widgets/embed.js"></script>
