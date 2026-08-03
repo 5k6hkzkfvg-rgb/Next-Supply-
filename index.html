@@ -1,5 +1,9 @@
+<!doctype html>
+<html lang="de">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Next Supply — Mitarbeiterverpflegung mit Löwenanteil und steuerbegünstigtem Essenszuschuss. Der Betrieb spart, das Team isst gut.">
 <title>Next Supply — Vertrieb & Steuersparmodell</title>
 <style>
   :root{
@@ -28,11 +32,7 @@
   h1,h2,h3{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;text-wrap:balance;margin:0}
   .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-text)}
   .view{display:none}
-  .view.active{display:block;animation:viewIn .34s ease}
-  @keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .nav{transition:background .2s ease,box-shadow .2s ease}
-  .nav.scrolled{background:color-mix(in srgb,var(--paper) 96%,transparent);box-shadow:0 3px 14px -8px rgba(31,27,22,.25)}
-  @media(prefers-reduced-motion:reduce){.view.active{animation:none}}
+  .view.active{display:block}
 
   /* nav */
   .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
@@ -49,24 +49,7 @@
   .nav-cta{font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;
     color:#fff;background:var(--red);padding:10px 17px;border-radius:2px;text-decoration:none;font-weight:600}
   .nav-cta:hover{background:var(--red-soft)}
-    .nav-toggle{display:none;background:none;border:0;cursor:pointer;width:42px;height:42px;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
-  .nav-toggle span{display:block;height:2px;width:23px;background:var(--ink);transition:transform .2s ease,opacity .2s ease}
-  .nl-cta{display:none}
-  @media(max-width:860px){
-    .nav-toggle{display:flex;order:2;margin-left:14px}
-    .nav .wrap{position:relative;padding:0 18px}
-    .nav .brand{font-size:15px}
-    .nav-cta{order:3;margin-left:auto;padding:8px 13px;font-size:10.5px;letter-spacing:.03em}
-    .nav-links{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:66px;background:var(--paper);border-bottom:1px solid var(--hairline);box-shadow:0 14px 26px -14px rgba(31,27,22,.28);padding:6px 0;transform:translateY(-10px);opacity:0;pointer-events:none;transition:transform .22s ease,opacity .22s ease}
-    .nav.open .nav-links{transform:none;opacity:1;pointer-events:auto}
-    .nav-links a{padding:15px 28px;font-size:14px;border-bottom:1px solid var(--hairline)}
-    footer{padding:36px 0}
-    footer .wrap{flex-direction:column;gap:16px}
-    .foot-links{gap:14px 20px;line-height:1.9}
-    .nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .nav.open .nav-toggle span:nth-child(2){opacity:0}
-    .nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  }
+  @media(max-width:860px){.nav-links{display:none}}
 
   /* hero */
   .hero{background:
@@ -288,6 +271,8 @@
   a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
   .ph{border-bottom:1px dashed var(--gold);cursor:help}
 </style>
+</head>
+<body>
 
 <div class="page">
 
@@ -300,10 +285,8 @@
         <a href="#/steuer" data-nav data-page="steuer">Steuervorteil</a>
         <a href="#/partner" data-nav data-page="partner">Partner</a>
         <a href="#/ueber-uns" data-nav data-page="ueber">Über uns</a>
-        <a href="#/kontakt" data-nav data-page="kontakt" class="nl-cta">Gespräch anfragen →</a>
       </div>
       <a href="#/kontakt" class="nav-cta" data-nav data-page="kontakt">Gespräch anfragen</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -400,7 +383,6 @@
           <a href="#/modell" data-nav>Modell</a><a href="#/ablauf" data-nav>Ablauf</a>
           <a href="#/steuer" data-nav>Steuervorteil</a><a href="#/partner" data-nav>Partner</a>
           <a href="#/ueber-uns" data-nav>Über uns</a><a href="#/kontakt" data-nav>Kontakt</a>
-          <a href="#/impressum" data-nav>Impressum</a><a href="#/datenschutz" data-nav>Datenschutz</a>
           <a href="https://fundraising.next-supply.de">Fundraising →</a>
         </span>
       </div>
@@ -471,7 +453,7 @@
         <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
       </div></div>
     </section>
-    <footer><div class="wrap"><span>© 2026 Next Supply UG · Modell</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Modell</span><span><a href="#/" data-nav>← Startseite</a></span></div></footer>
   </div>
 
   <!-- ============ ABLAUF ============ -->
@@ -531,9 +513,9 @@
       <div class="wrap">
         <div class="sec-head reveal"><div class="eyebrow">Häufige Fragen</div><h2>Was Betriebe vorab wissen wollen.</h2></div>
         <div class="faq reveal">
-          <details><summary>Wie schnell können wir starten?</summary><p>Platzhalter — hier echte Angabe ergänzen (z. B. „nach dem Erstgespräch in der Regel innerhalb von X Tagen").</p></details>
+          <details><summary>Wie schnell können wir starten?</summary><p>Von Erstgespräch bis zur ersten Lieferung solltest du ca. 3–4 Wochen einplanen. In dieser Zeit binden wir auch deinen Steuerberater ein, damit das Modell von Anfang an sauber aufgesetzt ist.</p></details>
           <details><summary>Muss mein Steuerberater eingebunden werden?</summary><p>Ja, und das ist gewollt: Wir setzen die Struktur so auf, dass sie von deinem Steuerberater geprüft und mitgetragen werden kann.</p></details>
-          <details><summary>Gibt es eine Mindestabnahme?</summary><p>Platzhalter — echte Konditionen/Mindestmengen hier einsetzen.</p></details>
+          <details><summary>Gibt es eine Mindestabnahme?</summary><p>Ja, die Mindestabnahme liegt bei 24 Gläsern pro Monat.</p></details>
           <details><summary>Gibt es vegane oder wechselnde Sorten?</summary><p>Ja. Das Angebot wechselt und umfasst vegane Optionen — zum Beispiel das neue Gelbe Thai Curry.</p></details>
         </div>
       </div>
@@ -546,7 +528,7 @@
         <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
       </div></div>
     </section>
-    <footer><div class="wrap"><span>© 2026 Next Supply UG · Ablauf</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Ablauf</span><span><a href="#/" data-nav>← Startseite</a></span></div></footer>
   </div>
 
   <!-- ============ STEUERVORTEIL ============ -->
@@ -697,7 +679,7 @@
         <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
       </div></div>
     </section>
-    <footer><div class="wrap"><span>© 2026 Next Supply UG · Steuervorteil</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Steuervorteil</span><span><a href="#/" data-nav>← Startseite</a></span></div></footer>
   </div>
 
   <!-- ============ PARTNER ============ -->
@@ -740,7 +722,7 @@
         <span>Löwenanteil</span><span>·</span><span>Essenszuschuss 2026</span>
       </div></div>
     </section>
-    <footer><div class="wrap"><span>© 2026 Next Supply UG · Partner</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Partner</span><span><a href="#/" data-nav>← Startseite</a></span></div></footer>
   </div>
 
   <!-- ============ ÜBER UNS ============ -->
@@ -800,20 +782,24 @@
           </div>
           <div class="steckbrief reveal">
             <div class="sb-head">
-              <div class="sb-ava">HA</div>
+              <div class="sb-ava">SE</div>
               <div>
-                <div class="sb-name">Hussein Al&nbsp;Ezzi</div>
-                <div class="sb-role">Gründer &amp; Gesellschafter · Next Supply</div>
+                <div class="sb-name">Suna Ezzi</div>
+                <div class="sb-role">Mitgründer &amp; Gesellschafter · Next Supply</div>
               </div>
             </div>
             <dl class="sb-facts">
-              <div><dt>Sitz</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
-              <div><dt>Schwerpunkt</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
-              <div><dt>Kommt aus</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
-              <div><dt>Arbeitsweise</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
-              <div><dt>Motto</dt><dd><span class="ph" title="ergänzen">ergänzen</span></dd></div>
+              <div><dt>Sitz</dt><dd>Münster</dd></div>
+              <div><dt>Schwerpunkt</dt><dd>Strategie &amp; Kommunikation</dd></div>
+              <div><dt>Kommt aus</dt><dd>Handwerk &amp; Vertrieb</dd></div>
+              <div><dt>Arbeitsweise</dt><dd>Grundlegend &amp; ergänzend</dd></div>
+              <div><dt>Motto</dt><dd>„Win – Win – Win"</dd></div>
             </dl>
-            <p class="sb-text"><span class="ph" title="ergänzen">Kurzer persönlicher Text über Suna – hier 2–3 Sätze ergänzen.</span></p>
+            <p class="sb-text">Ich bin Suna Ezzi, Mitgründer und Gesellschafter. Mein Fokus
+              liegt auf Strukturen, Prozessen und der operativen Organisation – ich sorge
+              dafür, dass im Hintergrund alles sauber läuft und aus Ideen ein tragfähiges
+              System wird. So schaffen wir die Basis, um unser Modell zuverlässig an
+              B2B-Unternehmen zu bringen.</p>
           </div>
         </div>
       </div>
@@ -837,7 +823,7 @@
         <a href="mailto:kontakt@next-supply.de" class="btn btn-primary">Gespräch anfragen →</a>
       </div></div>
     </section>
-    <footer><div class="wrap"><span>© 2026 Next Supply UG · Über uns</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Über uns</span><span><a href="#/" data-nav>← Startseite</a></span></div></footer>
   </div>
 
   <!-- ============ KONTAKT ============ -->
@@ -856,14 +842,8 @@
       <div class="wrap">
         <div class="contact-grid">
           <div class="reveal">
-            <div class="embed-placeholder">
-              <div class="eyebrow" style="color:var(--gold-text)">Kontaktformular</div>
-              <h3>Hier läuft dein Anfrage-Formular.</h3>
-              <p>Auf der Live-Website ist an dieser Stelle das Formular direkt eingebettet —
-                jede Anfrage landet automatisch als Lead im CRM. In dieser Vorschau öffnest
-                du es in einem neuen Tab:</p>
-              <a href="https://tally.so/r/aQXLpq" target="_blank" rel="noopener" class="btn btn-primary">Formular öffnen →</a>
-              <p class="embed-note">Prototyp-Vorschau · echter Embed rendert auf next-supply.de</p>
+            <div class="tally-embed">
+              <iframe data-tally-src="https://tally.so/embed/aQXLpq?transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" title="Kontakt — Next Supply" style="border:0;border-radius:10px;min-height:520px"></iframe>
             </div>
           </div>
 
@@ -884,137 +864,17 @@
         </div>
       </div>
     </section>
-    <footer><div class="wrap"><span>© 2026 Next Supply UG · Kontakt</span><span><a href="#/" data-nav>← Startseite</a> &middot; <a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/datenschutz" data-nav>Datenschutz</a></span></div></footer>
+    <footer><div class="wrap"><span>© 2026 Next Supply UG · Kontakt</span><span><a href="#/" data-nav>← Startseite</a></span></div></footer>
   </div>
-
-
-<style>
-  .legal{max-width:760px}
-  .legal h3.lh{font-family:var(--f-display);font-weight:800;font-size:20px;margin:30px 0 8px;color:var(--ink)}
-  .legal h3.lh.big{font-size:26px;margin-top:44px}
-  .legal p{margin:9px 0}
-  .legal p.soft{color:var(--ink-soft);font-size:16px}
-  .legal p.caps{text-transform:uppercase;font-size:13px;letter-spacing:.01em;color:var(--ink-soft)}
-  .legal .addr{margin:9px 0}
-</style>
-
-<!-- ============ IMPRESSUM ============ -->
-<div class="view" id="view-impressum">
-  <header class="hero hero--sub">
-    <div class="wrap">
-      <div class="crumb"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Impressum</div>
-      <div class="eyebrow">Rechtliches</div>
-      <h1 style="margin-top:16px">Impressum</h1>
-    </div>
-  </header>
-  <section style="padding-top:56px">
-    <div class="wrap legal">
-      <h3 class="lh">Angaben gem&auml;&szlig; &sect; 5 DDG</h3>
-      <p class="addr">Next Supply UG (haftungsbeschr&auml;nkt)<br>Am Waldesrand 6<br>28844 Weyhe</p>
-      <h3 class="lh">Vertreten durch den Gesch&auml;ftsf&uuml;hrer</h3>
-      <p>Alexander Vergiehn</p>
-      <h3 class="lh">Kontakt</h3>
-      <p>Telefon: 0176 30555295<br>E-Mail: kontakt@next-supply.de</p>
-      <h3 class="lh">Handelsregister</h3>
-      <p>Registergericht: Amtsgericht Walsrode<br>Registernummer: HRB 213737</p>
-      <h3 class="lh">Umsatzsteuer-ID</h3>
-      <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27a UStG:<br>[USt-IdNr nachtragen]</p>
-      <h3 class="lh">Verantwortlich f&uuml;r den Inhalt nach &sect; 18 Abs. 2 MStV</h3>
-      <p>Alexander Vergiehn, Anschrift wie oben</p>
-      <h3 class="lh">Haftung f&uuml;r Inhalte</h3>
-      <p class="soft">Die Inhalte dieser Seiten wurden mit gr&ouml;&szlig;ter Sorgfalt erstellt. F&uuml;r die Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t der Inhalte k&ouml;nnen wir jedoch keine Gew&auml;hr &uuml;bernehmen. Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs. 1 DDG f&uuml;r eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit hinweisen.</p>
-      <h3 class="lh">Haftung f&uuml;r Links</h3>
-      <p class="soft">Unser Angebot enth&auml;lt gegebenenfalls Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. F&uuml;r diese fremden Inhalte k&ouml;nnen wir keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.</p>
-      <h3 class="lh">Urheberrecht</h3>
-      <p class="soft">Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechts bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
-      <p style="margin-top:30px"><a href="#/" data-nav class="more">&larr; Zur&uuml;ck zur Startseite</a></p>
-    </div>
-  </section>
-  <footer><div class="wrap"><span>&copy; 2026 Next Supply UG &middot; Impressum</span><span><a href="#/datenschutz" data-nav>Datenschutz</a> &middot; <a href="#/" data-nav>Startseite</a></span></div></footer>
-</div>
-
-<!-- ============ DATENSCHUTZ ============ -->
-<div class="view" id="view-datenschutz">
-  <header class="hero hero--sub">
-    <div class="wrap">
-      <div class="crumb"><a href="#/" data-nav>Next Supply</a> &nbsp;/&nbsp; Datenschutz</div>
-      <div class="eyebrow">Rechtliches</div>
-      <h1 style="margin-top:16px">Datenschutzerkl&auml;rung</h1>
-    </div>
-  </header>
-  <section style="padding-top:48px">
-    <div class="wrap legal">
-
-      <h3 class="lh big">1. Datenschutz auf einen Blick</h3>
-      <h3 class="lh">Allgemeine Hinweise</h3>
-      <p class="soft">Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie pers&ouml;nlich identifiziert werden k&ouml;nnen. Ausf&uuml;hrliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgef&uuml;hrten Datenschutzerkl&auml;rung.</p>
-      <h3 class="lh">Datenerfassung auf dieser Website</h3>
-      <p><strong>Wer ist verantwortlich f&uuml;r die Datenerfassung auf dieser Website?</strong></p>
-      <p class="soft">Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten k&ouml;nnen Sie dem Abschnitt &bdquo;Hinweis zur verantwortlichen Stelle&ldquo; in dieser Datenschutzerkl&auml;rung entnehmen.</p>
-      <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
-      <p class="soft">Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.&nbsp;B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.</p>
-      <p><strong>Wof&uuml;r nutzen wir Ihre Daten?</strong></p>
-      <p class="soft">Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gew&auml;hrleisten. Andere Daten k&ouml;nnen zur Analyse Ihres Nutzerverhaltens verwendet werden. Sofern &uuml;ber die Website Vertr&auml;ge geschlossen oder angebahnt werden k&ouml;nnen, werden die &uuml;bermittelten Daten auch f&uuml;r Vertragsangebote, Bestellungen oder sonstige Auftragsanfragen verarbeitet.</p>
-      <p><strong>Welche Rechte haben Sie bez&uuml;glich Ihrer Daten?</strong></p>
-      <p class="soft">Sie haben jederzeit das Recht, unentgeltlich Auskunft &uuml;ber Herkunft, Empf&auml;nger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben au&szlig;erdem ein Recht, die Berichtigung oder L&ouml;schung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, k&ouml;nnen Sie diese Einwilligung jederzeit f&uuml;r die Zukunft widerrufen. Au&szlig;erdem haben Sie das Recht, unter bestimmten Umst&auml;nden die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde zu. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz k&ouml;nnen Sie sich jederzeit an uns wenden.</p>
-
-      <h3 class="lh big">2. Hosting</h3>
-      <p class="soft">Wir hosten die Inhalte unserer Website bei folgendem Anbieter:</p>
-      <h3 class="lh">Externes Hosting</h3>
-      <p class="soft">Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.&nbsp;a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die &uuml;ber eine Website generiert werden, handeln. Das externe Hosting erfolgt zum Zwecke der Vertragserf&uuml;llung gegen&uuml;ber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO). Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschlie&szlig;lich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und &sect; 25 Abs. 1 TDDDG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endger&auml;t des Nutzers (z.&nbsp;B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit widerrufbar.</p>
-      <p class="soft">Wir setzen folgenden Hoster ein:</p>
-      <p class="addr">Vercel Inc.<br>340 S Lemon Ave #4133<br>Walnut, CA 91789<br>USA</p>
-      <h3 class="lh">Auftragsverarbeitung</h3>
-      <p class="soft">Wir haben einen Vertrag &uuml;ber Auftragsverarbeitung (AVV) zur Nutzung des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gew&auml;hrleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.</p>
-
-      <h3 class="lh big">3. Allgemeine Hinweise und Pflichtinformationen</h3>
-      <h3 class="lh">Datenschutz</h3>
-      <p class="soft">Die Betreiber dieser Seiten nehmen den Schutz Ihrer pers&ouml;nlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerkl&auml;rung. Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben. Wir weisen darauf hin, dass die Daten&uuml;bertragung im Internet (z.&nbsp;B. bei der Kommunikation per E-Mail) Sicherheitsl&uuml;cken aufweisen kann. Ein l&uuml;ckenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht m&ouml;glich.</p>
-      <h3 class="lh">Hinweis zur verantwortlichen Stelle</h3>
-      <p class="soft">Die verantwortliche Stelle f&uuml;r die Datenverarbeitung auf dieser Website ist:</p>
-      <p class="addr">Next Supply UG (haftungsbeschr&auml;nkt)<br>Am Waldesrand 6<br>28844 Weyhe<br>Vertreten durch: Alexander Vergiehn (Gesch&auml;ftsf&uuml;hrer)<br>Telefon: 0176 30555295<br>E-Mail: kontakt@next-supply.de</p>
-      <p class="soft">Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person, die allein oder gemeinsam mit anderen &uuml;ber die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
-      <h3 class="lh">Speicherdauer</h3>
-      <p class="soft">Soweit innerhalb dieser Datenschutzerkl&auml;rung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck f&uuml;r die Datenverarbeitung entf&auml;llt. Wenn Sie ein berechtigtes L&ouml;schersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gel&ouml;scht, sofern wir keine anderen rechtlich zul&auml;ssigen Gr&uuml;nde f&uuml;r die Speicherung haben (z.&nbsp;B. steuer- oder handelsrechtliche Aufbewahrungsfristen).</p>
-      <h3 class="lh">Empf&auml;nger von personenbezogenen Daten</h3>
-      <p class="soft">Im Rahmen unserer Gesch&auml;ftst&auml;tigkeit arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei ist teilweise auch eine &Uuml;bermittlung von personenbezogenen Daten an diese externen Stellen erforderlich. Wir geben personenbezogene Daten nur dann an externe Stellen weiter, wenn dies im Rahmen einer Vertragserf&uuml;llung erforderlich ist, wenn wir gesetzlich hierzu verpflichtet sind, wenn wir ein berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die Datenweitergabe erlaubt. Beim Einsatz von Auftragsverarbeitern geben wir personenbezogene Daten nur auf Grundlage eines g&uuml;ltigen Vertrags &uuml;ber Auftragsverarbeitung weiter.</p>
-      <h3 class="lh">Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
-      <p class="soft">Viele Datenverarbeitungsvorg&auml;nge sind nur mit Ihrer ausdr&uuml;cklichen Einwilligung m&ouml;glich. Sie k&ouml;nnen eine bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtm&auml;&szlig;igkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unber&uuml;hrt.</p>
-      <h3 class="lh">Widerspruchsrecht (Art. 21 DSGVO)</h3>
-      <p class="caps">Wenn die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit das Recht, aus Gr&uuml;nden, die sich aus Ihrer besonderen Situation ergeben, gegen die Verarbeitung Ihrer personenbezogenen Daten Widerspruch einzulegen; dies gilt auch f&uuml;r ein auf diese Bestimmungen gest&uuml;tztes Profiling (Widerspruch nach Art. 21 Abs. 1 DSGVO). Werden Ihre personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, so haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung Sie betreffender personenbezogener Daten zum Zwecke derartiger Werbung einzulegen (Widerspruch nach Art. 21 Abs. 2 DSGVO).</p>
-      <h3 class="lh">Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde</h3>
-      <p class="soft">Im Falle von Verst&ouml;&szlig;en gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbeh&ouml;rde zu, insbesondere in dem Mitgliedstaat ihres gew&ouml;hnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutma&szlig;lichen Versto&szlig;es.</p>
-      <h3 class="lh">Auskunft, Berichtigung und L&ouml;schung</h3>
-      <p class="soft">Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft &uuml;ber Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empf&auml;nger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder L&ouml;schung dieser Daten.</p>
-      <h3 class="lh">Recht auf Einschr&auml;nkung der Verarbeitung</h3>
-      <p class="soft">Sie haben das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu k&ouml;nnen Sie sich jederzeit an uns wenden.</p>
-      <h3 class="lh">SSL- bzw. TLS-Verschl&uuml;sselung</h3>
-      <p class="soft">Diese Seite nutzt aus Sicherheitsgr&uuml;nden und zum Schutz der &Uuml;bertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschl&uuml;sselung. Eine verschl&uuml;sselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von &bdquo;http://&ldquo; auf &bdquo;https://&ldquo; wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
-
-      <h3 class="lh big">4. Datenerfassung auf dieser Website</h3>
-      <h3 class="lh">Kontaktformular</h3>
-      <p class="soft">Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und f&uuml;r den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erf&uuml;llung eines Vertrags zusammenh&auml;ngt oder zur Durchf&uuml;hrung vorvertraglicher Ma&szlig;nahmen erforderlich ist. In allen &uuml;brigen F&auml;llen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).</p>
-      <h3 class="lh">Anfrage per E-Mail oder Telefon</h3>
-      <p class="soft">Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Ma&szlig;nahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse) oder Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO.</p>
-      <h3 class="lh">Terminvereinbarung (&bdquo;Google Termine&ldquo;)</h3>
-      <p class="soft">Auf unserer Website haben Sie die M&ouml;glichkeit, &uuml;ber einen Link Termine (z.&nbsp;B. ein kostenloses Erstgespr&auml;ch) mit uns zu vereinbaren. F&uuml;r die Terminplanung nutzen wir die Terminfunktion von Google. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Wenn Sie einen Termin buchen, werden die von Ihnen angegebenen Daten (z.&nbsp;B. Name, E-Mail-Adresse, Zeitpunkt und Anlass des Termins) zum Zwecke der Vereinbarung und Durchf&uuml;hrung des Termins verarbeitet und in unserem Google-Kalender gespeichert. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO bzw. Art. 6 Abs. 1 lit. f DSGVO; sofern eine Einwilligung abgefragt wurde, auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO. Soweit Daten in die USA &uuml;bermittelt werden, st&uuml;tzt sich die &Uuml;bermittlung auf die Standardvertragsklauseln der EU-Kommission. Details: https://policies.google.com/privacy.</p>
-
-      <p class="soft"style="margin-top:26px;font-size:14px">Quelle: Standardbausteine auf Basis e-recht24.de</p>
-      <p style="margin-top:22px"><a href="#/" data-nav class="more">&larr; Zur&uuml;ck zur Startseite</a></p>
-    </div>
-  </section>
-  <footer><div class="wrap"><span>&copy; 2026 Next Supply UG &middot; Datenschutz</span><span><a href="#/impressum" data-nav>Impressum</a> &middot; <a href="#/" data-nav>Startseite</a></span></div></footer>
-</div>
 
 </div>
 
 <script>
   (function(){
-    var pages=['home','modell','ablauf','steuer','partner','ueber','kontakt','impressum','datenschutz'];
+    var pages=['home','modell','ablauf','steuer','partner','ueber','kontakt'];
     var views={};pages.forEach(function(p){views[p]=document.getElementById('view-'+p);});
     var hashToPage={'':'home','#/':'home','#/modell':'modell','#/ablauf':'ablauf',
-      '#/steuer':'steuer','#/partner':'partner','#/ueber-uns':'ueber','#/kontakt':'kontakt',
-      '#/impressum':'impressum','#/datenschutz':'datenschutz'};
+      '#/steuer':'steuer','#/partner':'partner','#/ueber-uns':'ueber','#/kontakt':'kontakt'};
     var navLinks=document.querySelectorAll('.nav-links a[data-page]');
 
     function reveal(scope){
@@ -1065,15 +925,6 @@
     });
   })();
 </script>
-
-<script>
-  (function(){
-    var nav=document.querySelector('.nav'), tog=document.getElementById('navToggle');
-    if(!tog||!nav) return;
-    tog.addEventListener('click',function(){var o=nav.classList.toggle('open');tog.setAttribute('aria-expanded',o?'true':'false');});
-    nav.addEventListener('click',function(e){if(e.target.closest('a[data-nav]')){nav.classList.remove('open');tog.setAttribute('aria-expanded','false');}});
-    var sc=function(){nav.classList.toggle('scrolled',window.scrollY>6);};
-    window.addEventListener('scroll',sc,{passive:true}); sc();
-  })();
-</script>
-</body></html>
+<script src="https://tally.so/widgets/embed.js"></script>
+</body>
+</html>
