@@ -271,7 +271,18 @@
 
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+  /* Headline-Zeilen-Reveal (Masken-Aufstieg) */
+  .hl .hl-line{display:block;overflow:hidden;padding-bottom:.1em}
+  .hl .hl-in{display:block;animation:nxsLineUp .95s cubic-bezier(.19,1,.22,1) both}
+  .hl .hl-line:nth-child(1) .hl-in{animation-delay:.10s}
+  .hl .hl-line:nth-child(2) .hl-in{animation-delay:.24s}
+  @keyframes nxsLineUp{from{transform:translateY(112%)}to{transform:translateY(0)}}
+  /* Karten-Hover site-weit */
+  .pillar,.member,.steckbrief{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+  .pillar:hover,.member:hover,.steckbrief:hover{transform:translateY(-4px);
+    border-color:color-mix(in srgb,var(--gold) 55%,var(--hairline));
+    box-shadow:0 10px 30px color-mix(in srgb,var(--ink) 8%,transparent)}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none} .hl .hl-in{animation:none}}
   a:focus-visible,.btn:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
   .ph{border-bottom:1px dashed var(--gold);cursor:help}
 </style>
@@ -301,7 +312,10 @@
         <div class="hero-grid">
           <div>
             <div class="eyebrow reveal">Mitarbeiterverpflegung · Löwenanteil</div>
-            <h1 class="reveal" style="margin-top:18px">Mittagessen fürs Team,<br>das sich <span class="accent">rechnet</span>.</h1>
+            <h1 class="hl" style="margin-top:18px">
+              <span class="hl-line"><span class="hl-in">Mittagessen fürs Team,</span></span>
+              <span class="hl-line"><span class="hl-in">das sich <span class="accent">rechnet</span>.</span></span>
+            </h1>
             <p class="lead reveal">Next Supply verpflegt deine Mitarbeiter mit vollwertigen
               Mahlzeiten von Löwenanteil — kombiniert mit dem steuerbegünstigten
               Essenszuschuss. Der Betrieb spart, das Team isst günstig und gut.</p>
